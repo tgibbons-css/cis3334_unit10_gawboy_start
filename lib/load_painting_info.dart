@@ -24,7 +24,6 @@ class LoadPaintingInfo {
     return paintings;
   }
 
-
   List<PaintingInfo> InitInCode(){
     PaintingInfo item = new PaintingInfo(1,'by_the_fire_1.jpg', 'By the Fire', 'Chippewa Camp Scene');
     item.setGawboyDescription('The series of paintings in which fire light was kind of common theme.');
@@ -60,7 +59,5 @@ class LoadPaintingInfo {
 
     return paintings;
   }
-
-
 
 }
