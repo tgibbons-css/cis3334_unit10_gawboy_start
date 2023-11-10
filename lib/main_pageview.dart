@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:cis3334_unit10_gawboy/load_painting_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -39,12 +37,11 @@ class _MyHomePageState extends State<MyHomePage> {
   int x = 0;
   List<PaintingInfo> gawboyPaintings = [];
   LoadPaintingInfo paintLoader = new LoadPaintingInfo();
-  final PageController ctrl = PageController();
 
   @override
   void initState() {
     //gawboyPaintings =  paintLoader.getPaintingList();
-    gawboyPaintings = paintLoader.InitInCode();
+    gawboyPaintings =  paintLoader.InitInCode();
   }
 
   @override
@@ -53,35 +50,21 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Container(
-        child: ScrollConfiguration(
-          behavior: ScrollConfiguration.of(context).copyWith(
-            dragDevices: {
-              PointerDeviceKind.touch,
-              PointerDeviceKind.mouse,
-            },
-          ),
-          child: PageView.builder(
-              controller: ctrl,
-              scrollDirection: Axis.vertical,
-              itemCount: gawboyPaintings.length,
-              itemBuilder: (BuildContext context, int position) {
-                return Container(
-                    child: Column(
-                      children: <Widget>[
-                        Image.asset('assets/images/' +
-                            gawboyPaintings[position].imageFile,
-                            fit: BoxFit.cover),
-                        Text(gawboyPaintings[position].name),
-                        Text(gawboyPaintings[position].gawboyDescription),
-                        //leading: Image(image: NetworkImage(xkcdComics[position].img)),
-                      ],
-                    )
+      body: PageView.builder(
+          itemCount: gawboyPaintings.length,
+          itemBuilder: (BuildContext context, int position){
+            return Container(
+                child: Stack(
+                  children: <Widget>[
+                    Text(gawboyPaintings[position].name),
+                    Text(gawboyPaintings[position].gawboyDescription),
+                    Image.asset('assets/images/'+gawboyPaintings[position].imageFile),
+                    //leading: Image(image: NetworkImage(xkcdComics[position].img)),
+                  ],
+                )
 
-                );
-              }
-          ),
-        ),
+            );
+          }
       ),
     );
   }
